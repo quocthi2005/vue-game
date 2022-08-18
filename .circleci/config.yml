@@ -41,14 +41,14 @@ jobs:
 
  
 workflows:
-  version: 2
-  master-deploy:
+  default:
     jobs:
       - deploy:
           filters:
             branches:
               only: main
-  send-notification:
-    jobs:
       - notify:
+          filters:
+              branches:
+                only: main
           context: slack-notify
