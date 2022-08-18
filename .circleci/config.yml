@@ -91,29 +91,15 @@ workflows:
   version: 2
   test:
     jobs:
-      - install:
-          <<: *filters
-      - core:
-          <<: *filters
+      - build_apps:
+          filters:
+            branches:
+              only:
+                - main
+      - build_and_deploy:
           requires:
-            - install
-      - typescript:
-          <<: *filters
-          requires:
-            - install
-      - plugins:
-          <<: *filters
-          requires:
-            - install
-      - tests:
-          <<: *filters
-          requires:
-            - install
-      - cli-ui:
-          <<: *filters
-          requires:
-            - install
-      - e2e:
-          <<: *filters
-          requires:
-            - install
+            - build_apps
+          filters:
+            branches:
+              only:
+                - main
