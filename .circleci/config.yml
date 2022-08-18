@@ -89,7 +89,7 @@ jobs:
 
 workflows:
   version: 2
-  test:
+  default:
     jobs:
       - build_apps:
           filters:
