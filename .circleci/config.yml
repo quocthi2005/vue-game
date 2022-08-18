@@ -17,7 +17,27 @@ jobs:
             sudo apt-get update
             sudo apt-get -qq install git-ftp
             echo "Deploying project ..."
-      - slack-notify
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 
  
 workflows:
@@ -28,3 +48,7 @@ workflows:
           filters:
             branches:
               only: main
+  send-notification:
+    jobs:
+      - notify:
+          context: slack-notify
