@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  slack: circleci/slack@4.4.4
 jobs:
   deploy:
     docker:
@@ -15,6 +17,7 @@ jobs:
             sudo apt-get update
             sudo apt-get -qq install git-ftp
             echo "Deploying project ..."
+      - slack/notify
 
  
 workflows:
