@@ -51,7 +51,7 @@ jobs:
 
 workflows:
   version: 2
-  test:
+  default:
     jobs:
       - install:
           <<: *filters
