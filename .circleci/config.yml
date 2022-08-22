@@ -17,10 +17,6 @@ jobs:
             sudo apt-get update
             sudo apt-get -qq install git-ftp
             echo "Deploying project ..."
-  notify:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
       - slack/notify:
           event: fail
           template: basic_fail_1
@@ -36,8 +32,4 @@ workflows:
           filters:
             branches:
               only: main
-      - notify:
-          filters:
-              branches:
-                only: main
           context: slack-notify
